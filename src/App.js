@@ -3,19 +3,30 @@ import './App.css'
 import Photo from './Photo'
 import Photos from './Photos'
 import {} from 'dotenv/config'
-import response from 'superagent'
+import request from 'superagent'
+import { runInThisContext } from 'vm';
 
 const accessKey = process.env.REACT_APP_ACCESS_KEY
-console.log(accessKey)
 
 class App extends Component {
-  // state will hold whether or not photo is expanded
-  runSearch (formInput) {
-    formInput.preventDefault()
-    request
-      .get(`https://api.unsplash.com/search/photos/?client_id=${accessKey}`)
-      .then(response => {
+  constructor (props) {
+    super(props)
+    this.state = {searchInput: ''}
+    this.searchInputToState = this.searchInputToState.bind(this)
+    this.runSearch = this.runSearch.bind(this)
+  }
 
+  searchInputToState (event) {
+    this.setState({searchInput: event.target.value})
+  }
+  // state will hold whether or not photo is expanded
+  runSearch (event) {
+    event.preventDefault()
+    console.log(this.state.searchInput)
+    request
+      .get(`https://api.unsplash.com/search/photos?client_id=${accessKey}&query=${this.state.searchInput}`)
+      .then(response => {
+        console.log(response.body)
       })
   }
 
@@ -42,9 +53,10 @@ class App extends Component {
           <h1>Pic Picker</h1>
         </header>
         <main>
-          <form className='searchForm'>
-            <input type='text' />
-            <button className='searchButton' onSubmit={runSearch}>Pick Pics</button>
+          <form className='searchForm' onSubmit={this.runSearch}>
+            <input className='searchInput' type='text' value={this.state.searchInput} onChange={this.searchInputToState} />
+            <button className='searchButton' type='submit'>Pick Pics</button>
+            {console.log(this.state.searchInput)}
           </form>
         </main>
       </div>
