@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './App.css'
+import './index.css'
 import Photo from './Photo'
 import Photos from './Photos'
 import {} from 'dotenv/config'
@@ -19,27 +19,13 @@ class App extends Component {
     }
     this.searchInputToState = this.searchInputToState.bind(this)
     this.runSearch = this.runSearch.bind(this)
+    this.expandPhoto = this.expandPhoto.bind(this)
+    this.photoStatus = this.photoStatus.bind(this)
   }
 
   searchInputToState (event) {
     this.setState({searchInput: event.target.value})
   }
-
-  // getPhotoInfo (photoArray) {
-  //   console.log(this.state.photoArray)
-  //   this.state.photoArray.map((singlePhoto) => {
-  //     console.log(singlePhoto)
-  // let thumbnail = singlePhoto.urls.thumb
-  // let originalPhoto = singlePhoto.urls.regular
-  // let userName = singlePhoto.user.name
-  // let photoToHTML = <div className='photoDiv'>
-  //   <img className='thumbOnPage' src={thumbnail} /></div>
-  // this.state.photosToDisplay.concat(photoToHTML)
-  // console.log(this.state.photosToDisplay)
-  // this.setState({ photosToDisplay: photoToHTML
-  // })
-  //   })
-  // }
 
   // componentDidUpdate () {
   //   console.log('photoArrayupdate', this.state.photoArray)
@@ -59,6 +45,31 @@ class App extends Component {
     // this.setState({searchInput: ''})
   }
 
+  expandPhoto (singlePhoto) {
+    this.setState(prevState => { return { expandedPhotos: prevState.expandedPhotos.concat(singlePhoto.id) }
+    // Need to concat? YES function takes previous state and then concat onto that. See Tweetshrink app.js line 60
+  })
+
+  // addSynonymToTextOptions (origWord, synonym) {
+  //   const newOption = {
+  //     id: `syn-${origWord}-${synonym}`,
+  //     label: `Replace "${origWord}" with "${synonym}"`,
+  //     fn: text => text.replace(new RegExp(`\\b${origWord}\\b`), synonym)
+  //   }
+  //   this.setState(prevState => {
+  //     return {
+  //       textOptions: prevState.textOptions.concat(newOption)
+  //     }
+  //   })
+  // }
+
+  let photoStatus
+  if (this.state.expandedPhotos.contains singlePhoto.id) {
+
+  } else {
+
+  }
+
   render () {
     return (
       <div className='App'>
@@ -73,12 +84,12 @@ class App extends Component {
           <div className='photoDisplayArea'>
             {this.state.photoArray.map((singlePhoto, i) => (
               <div key={singlePhoto.id}>
-                <img className='thumbnailDisplay' src={singlePhoto.urls.thumb} />
-                <button className='expandButton'>Expand Photo</button>
-                <div class='expandPhoto hidden'>
-                  <img classname='expandedPhoto' src={singlePhoto.urls.regular} />
+                <img className='thumbnailDisplay' onClick={(event) => this.expandPhoto(singlePhoto)} src={singlePhoto.urls.thumb} />
+                {/* If index is in expandedPhotos, do below */}
+                {photoStatus}
+                <div className='expandedPhotoDiv hidden'>
+                  <img className='expandedPhoto' src={singlePhoto.urls.regular} />
                   <p className='userName'>Photo by: {singlePhoto.user.name}</p>
-
                 </div>
               </div>
             ))
