@@ -13,49 +13,48 @@ class App extends Component {
     super(props)
     this.state =
     {searchInput: '',
-      photoDiv: [],
-      thumbsToDisplay: []
-      // openPhoto: ''
+      photoArray: [],
+      photosToDisplay: [],
+      expandedPhotos: []
     }
     this.searchInputToState = this.searchInputToState.bind(this)
     this.runSearch = this.runSearch.bind(this)
-    this.getPhotoInfo = this.getPhotoInfo.bind(this)
-    // Not sure if I need the getPhotoInfo binding
   }
 
   searchInputToState (event) {
     this.setState({searchInput: event.target.value})
   }
 
-  getPhotoInfo (photoDiv) {
-    console.log(this.state.photoDiv)
-    this.state.photoDiv.map((singlePhoto) => {
-      let thumbnail = singlePhoto.urls.thumb
-      let originalPhoto = singlePhoto.urls.regular
-      let userName = singlePhoto.user.className
-      
-      console.log(thumbnail)
-    })
-  }
+  // getPhotoInfo (photoArray) {
+  //   console.log(this.state.photoArray)
+  //   this.state.photoArray.map((singlePhoto) => {
+  //     console.log(singlePhoto)
+  // let thumbnail = singlePhoto.urls.thumb
+  // let originalPhoto = singlePhoto.urls.regular
+  // let userName = singlePhoto.user.name
+  // let photoToHTML = <div className='photoDiv'>
+  //   <img className='thumbOnPage' src={thumbnail} /></div>
+  // this.state.photosToDisplay.concat(photoToHTML)
+  // console.log(this.state.photosToDisplay)
+  // this.setState({ photosToDisplay: photoToHTML
+  // })
+  //   })
+  // }
 
   // componentDidUpdate () {
-  //   console.log('photodivupdate', this.state.photoDiv)
+  //   console.log('photoArrayupdate', this.state.photoArray)
   // }
 
   runSearch (event) {
     event.preventDefault()
-    // console.log(this.state.searchInput)
     request
       .get(`https://api.unsplash.com/search/photos?client_id=${accessKey}&query=${this.state.searchInput}`)
       .then(response => {
-        // console.log(response.body)
-        // console.log('notbody', response.results)
         let searchResults = response.body.results
         console.log(searchResults)
         this.setState({
-          photoDiv: searchResults})
-        // console.log(this.state.searchInput)
-        this.getPhotoInfo(this.state.photoDiv)
+          photoArray: searchResults})
+        // this.getPhotoInfo(this.state.photoArray)
       })
     // this.setState({searchInput: ''})
   }
@@ -72,8 +71,18 @@ class App extends Component {
             <button className='searchButton' type='submit'>Pick Pics</button>
           </form>
           <div className='photoDisplayArea'>
-            <img src={this.state.thumbsToDisplay[i]} />
-            {/* You left off on line above */}
+            {this.state.photoArray.map((singlePhoto, i) => (
+              <div key={singlePhoto.id}>
+                <img className='thumbnailDisplay' src={singlePhoto.urls.thumb} />
+                <button className='expandButton'>Expand Photo</button>
+                <div class='expandPhoto hidden'>
+                  <img classname='expandedPhoto' src={singlePhoto.urls.regular} />
+                  <p className='userName'>Photo by: {singlePhoto.user.name}</p>
+
+                </div>
+              </div>
+            ))
+            }
           </div>
         </main>
       </div>
