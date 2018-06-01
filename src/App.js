@@ -20,7 +20,7 @@ class App extends Component {
     this.searchInputToState = this.searchInputToState.bind(this)
     this.runSearch = this.runSearch.bind(this)
     this.expandPhoto = this.expandPhoto.bind(this)
-    this.photoStatus = this.photoStatus.bind(this)
+    // this.photoStatus = this.photoStatus.bind(this)
   }
 
   searchInputToState (event) {
@@ -46,29 +46,20 @@ class App extends Component {
   }
 
   expandPhoto (singlePhoto) {
-    this.setState(prevState => { return { expandedPhotos: prevState.expandedPhotos.concat(singlePhoto.id) }
-    // Need to concat? YES function takes previous state and then concat onto that. See Tweetshrink app.js line 60
-  })
-
-  // addSynonymToTextOptions (origWord, synonym) {
-  //   const newOption = {
-  //     id: `syn-${origWord}-${synonym}`,
-  //     label: `Replace "${origWord}" with "${synonym}"`,
-  //     fn: text => text.replace(new RegExp(`\\b${origWord}\\b`), synonym)
-  //   }
-  //   this.setState(prevState => {
-  //     return {
-  //       textOptions: prevState.textOptions.concat(newOption)
-  //     }
-  //   })
-  // }
-
-  let photoStatus
-  if (this.state.expandedPhotos.contains singlePhoto.id) {
-
-  } else {
-
+    console.log('clicked')
+    console.log(this.state.expandedPhotos)
+    this.setState(prevState => {
+      return { expandedPhotos: prevState.expandedPhotos.concat(singlePhoto) }
+    // Need to concat? YES function takes previous state and then concat onto that. See Tweetshrink app.js line 60. DONE but keeping here for reference.
+    })
   }
+
+  // let photoStatus
+  // if (this.state.expandedPhotos.contains singlePhoto.id) {
+  // Don't forget to uncomment out the bind in the constructor
+  // } else {
+
+  // }
 
   render () {
     return (
@@ -85,15 +76,23 @@ class App extends Component {
             {this.state.photoArray.map((singlePhoto, i) => (
               <div key={singlePhoto.id}>
                 <img className='thumbnailDisplay' onClick={(event) => this.expandPhoto(singlePhoto)} src={singlePhoto.urls.thumb} />
-                {/* If index is in expandedPhotos, do below */}
-                {photoStatus}
-                <div className='expandedPhotoDiv hidden'>
-                  <img className='expandedPhoto' src={singlePhoto.urls.regular} />
-                  <p className='userName'>Photo by: {singlePhoto.user.name}</p>
-                </div>
               </div>
             ))
             }
+            {/* {photoStatus} */}
+            <div>
+              {this.state.expandedPhotos.map((singlePhoto, i) => (
+                // Function to access info associated with key?
+                // OR use photo class and true false isExpanded?
+                // OR only one photo can expand at a time
+                <div key={singlePhoto.id}className='expandedPhotoDiv'>
+                  {/* Add onClick funtion to above to take off of array */}
+                  <img className='expandedPhoto' src={singlePhoto.urls.regular} />
+                  <p className='userName'>Photo by: {singlePhoto.user.name}</p>
+                </div>
+              ))
+              }
+            </div>
           </div>
         </main>
       </div>
