@@ -13,7 +13,8 @@ class App extends Component {
     super(props)
     this.state =
     {searchInput: '',
-      photoDiv: []
+      photoDiv: [],
+      thumbsToDisplay: []
       // openPhoto: ''
     }
     this.searchInputToState = this.searchInputToState.bind(this)
@@ -30,6 +31,9 @@ class App extends Component {
     console.log(this.state.photoDiv)
     this.state.photoDiv.map((singlePhoto) => {
       let thumbnail = singlePhoto.urls.thumb
+      let originalPhoto = singlePhoto.urls.regular
+      let userName = singlePhoto.user.className
+      
       console.log(thumbnail)
     })
   }
@@ -67,6 +71,10 @@ class App extends Component {
             <input className='searchInput' type='text' onChange={this.searchInputToState} />
             <button className='searchButton' type='submit'>Pick Pics</button>
           </form>
+          <div className='photoDisplayArea'>
+            <img src={this.state.thumbsToDisplay[i]} />
+            {/* You left off on line above */}
+          </div>
         </main>
       </div>
     )
