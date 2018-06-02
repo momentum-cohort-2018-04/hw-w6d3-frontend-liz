@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './index.css'
 import Photo from './Photo'
-import Photos from './Photos'
+// import Photos from './Photos'
 import {} from 'dotenv/config'
 // Above is for your env file to work
 import request from 'superagent'
@@ -44,8 +44,10 @@ class App extends Component {
   expandPhoto (singlePhoto) {
     // console.log('photoClicked')
     this.setState({expandedPhotos: singlePhoto})
+    let bigPhoto = new Photo(this.state.expandedPhotos)
+    bigPhoto()
   }
-
+  // <Photo bigPhoto={this.state.expandedPhotos} />
   componentDidUpdate () {
     console.log('expandedPhotosupdate', this.state.expandedPhotos)
   }
@@ -77,22 +79,7 @@ class App extends Component {
               </div>
             ))
             }
-            {/* {photoStatus} */}
-            <div>
-              <Photo />
-              {/* {this.expandPhotoHTML(this.singlePhoto)} */}
-              {/* {this.state.expandedPhotos((singlePhoto, i) => (
-                // Function to access info associated with key?...no
-                // OR use photo class and true false isExpanded?
-                // OR only one photo can expand at a time...trying
-                <div key={singlePhoto.id} className='expandedPhotoDiv'> */}
-              {/* Add onClick funtion to above to take off of array */}
-              {/* <img className='expandedPhoto' src={singlePhoto.urls.regular} />
-              <p className='userName'>Photo by: {singlePhoto.user.name}</p>
-            </div> */}
-              {/* ))
-              } */}
-            </div>
+            <Photo />
           </div>
         </main>
       </div>
