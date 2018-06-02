@@ -20,16 +20,12 @@ class App extends Component {
     this.searchInputToState = this.searchInputToState.bind(this)
     this.runSearch = this.runSearch.bind(this)
     this.expandPhoto = this.expandPhoto.bind(this)
-    // this.photoStatus = this.photoStatus.bind(this)
+    this.expandPhotoHTML = this.expandPhotoHTML.bind(this)
   }
 
   searchInputToState (event) {
     this.setState({searchInput: event.target.value})
   }
-
-  // componentDidUpdate () {
-  //   console.log('photoArrayupdate', this.state.photoArray)
-  // }
 
   runSearch (event) {
     event.preventDefault()
@@ -40,7 +36,6 @@ class App extends Component {
         console.log(searchResults)
         this.setState({
           photoArray: searchResults})
-        // this.getPhotoInfo(this.state.photoArray)
       })
     // this.setState({searchInput: ''})
   }
@@ -48,15 +43,20 @@ class App extends Component {
   expandPhoto (singlePhoto) {
     // console.log('photoClicked')
     this.setState({expandedPhotos: singlePhoto})
-    console.log(this.state.expandedPhotos)
   }
 
-  // let photoStatus
-  // if (this.state.expandedPhotos.contains singlePhoto.id) {
-  // Don't forget to uncomment out the bind in the constructor
-  // } else {
+  componentDidUpdate () {
+    console.log('expandedPhotosupdate', this.state.expandedPhotos)
+  }
 
-  // }
+  expandPhotoHTML (singlePhoto) {
+    this.state.expandedPhotos.html(
+      <div key={singlePhoto.id} className='expandedPhotoDiv'>
+        <img className='expandedPhoto' src={singlePhoto.urls.regular} />
+        <p className='userName'>Photo by: {singlePhoto.user.name}</p>
+      </div>
+    )
+  }
 
   render () {
     return (
@@ -78,17 +78,18 @@ class App extends Component {
             }
             {/* {photoStatus} */}
             <div>
-              {this.state.expandedPhotos.map((singlePhoto, i) => (
+              {this.expandPhotoHTML(this.singlePhoto)}
+              {/* {this.state.expandedPhotos((singlePhoto, i) => (
                 // Function to access info associated with key?...no
                 // OR use photo class and true false isExpanded?
                 // OR only one photo can expand at a time...trying
-                <div key={singlePhoto.id} className='expandedPhotoDiv'>
-                  {/* Add onClick funtion to above to take off of array */}
-                  <img className='expandedPhoto' src={singlePhoto.urls.regular} />
-                  <p className='userName'>Photo by: {singlePhoto.user.name}</p>
-                </div>
-              ))
-              }
+                <div key={singlePhoto.id} className='expandedPhotoDiv'> */}
+              {/* Add onClick funtion to above to take off of array */}
+              {/* <img className='expandedPhoto' src={singlePhoto.urls.regular} />
+              <p className='userName'>Photo by: {singlePhoto.user.name}</p>
+            </div> */}
+              {/* ))
+              } */}
             </div>
           </div>
         </main>
