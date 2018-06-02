@@ -3,6 +3,7 @@ import './index.css'
 import Photo from './Photo'
 import Photos from './Photos'
 import {} from 'dotenv/config'
+// Above is for your env file to work
 import request from 'superagent'
 import { runInThisContext } from 'vm'
 
@@ -20,7 +21,7 @@ class App extends Component {
     this.searchInputToState = this.searchInputToState.bind(this)
     this.runSearch = this.runSearch.bind(this)
     this.expandPhoto = this.expandPhoto.bind(this)
-    this.expandPhotoHTML = this.expandPhotoHTML.bind(this)
+    // this.expandPhotoHTML = this.expandPhotoHTML.bind(this)
   }
 
   searchInputToState (event) {
@@ -49,14 +50,14 @@ class App extends Component {
     console.log('expandedPhotosupdate', this.state.expandedPhotos)
   }
 
-  expandPhotoHTML (singlePhoto) {
-    this.state.expandedPhotos.html(
-      <div key={singlePhoto.id} className='expandedPhotoDiv'>
-        <img className='expandedPhoto' src={singlePhoto.urls.regular} />
-        <p className='userName'>Photo by: {singlePhoto.user.name}</p>
-      </div>
-    )
-  }
+  // expandPhotoHTML (singlePhoto) {
+  //   return this.state.expandedPhotos.html(
+  //     <div className='expandedPhotoDiv'>
+  //       <img className='expandedPhoto' src={singlePhoto.urls.regular} />
+  //       <p className='userName'>Photo by: {singlePhoto.user.name}</p>
+  //     </div>
+  //   )
+  // }
 
   render () {
     return (
@@ -78,7 +79,8 @@ class App extends Component {
             }
             {/* {photoStatus} */}
             <div>
-              {this.expandPhotoHTML(this.singlePhoto)}
+              <Photo />
+              {/* {this.expandPhotoHTML(this.singlePhoto)} */}
               {/* {this.state.expandedPhotos((singlePhoto, i) => (
                 // Function to access info associated with key?...no
                 // OR use photo class and true false isExpanded?

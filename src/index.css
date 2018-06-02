@@ -23,6 +23,10 @@ body {
 
 /* Photo Display Area Styling */
 
+.thumbnailDisplay:hover {
+  cursor: pointer;
+}
+
 .expandedPhoto {
   max-width: 90%;
 }
