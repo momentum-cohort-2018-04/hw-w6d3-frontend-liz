@@ -1,3 +1,1 @@
 import Photos from './Photos'
-
-

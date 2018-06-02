@@ -3,10 +3,25 @@
 }
 
 body {
-  margin: 0;
+  margin: 50px;
   padding: 0;
   font-family: sans-serif;
 }
+
+
+/* Header and Search Bar Styling */
+
+.searchInput {
+  width: 80%;
+  line-height: 20px;
+}
+
+.searchButton {
+  line-height: 21px;
+}
+
+
+/* Photo Display Area Styling */
 
 .expandedPhoto {
   max-width: 90%;

@@ -46,12 +46,9 @@ class App extends Component {
   }
 
   expandPhoto (singlePhoto) {
-    console.log('clicked')
+    // console.log('photoClicked')
+    this.setState({expandedPhotos: singlePhoto})
     console.log(this.state.expandedPhotos)
-    this.setState(prevState => {
-      return { expandedPhotos: prevState.expandedPhotos.concat(singlePhoto) }
-    // Need to concat? YES function takes previous state and then concat onto that. See Tweetshrink app.js line 60. DONE but keeping here for reference.
-    })
   }
 
   // let photoStatus
@@ -65,12 +62,12 @@ class App extends Component {
     return (
       <div className='App'>
         <header>
-          <h1>Pic Picker</h1>
+          <h1>Photo Fetcher</h1>
         </header>
         <main>
           <form className='searchForm' onSubmit={this.runSearch}>
-            <input className='searchInput' type='text' onChange={this.searchInputToState} />
-            <button className='searchButton' type='submit'>Pick Pics</button>
+            <input className='searchInput' type='text' placeholder='Search for images' onChange={this.searchInputToState} />
+            <button className='searchButton' type='submit'>Fetch</button>
           </form>
           <div className='photoDisplayArea'>
             {this.state.photoArray.map((singlePhoto, i) => (
@@ -82,10 +79,10 @@ class App extends Component {
             {/* {photoStatus} */}
             <div>
               {this.state.expandedPhotos.map((singlePhoto, i) => (
-                // Function to access info associated with key?
+                // Function to access info associated with key?...no
                 // OR use photo class and true false isExpanded?
-                // OR only one photo can expand at a time
-                <div key={singlePhoto.id}className='expandedPhotoDiv'>
+                // OR only one photo can expand at a time...trying
+                <div key={singlePhoto.id} className='expandedPhotoDiv'>
                   {/* Add onClick funtion to above to take off of array */}
                   <img className='expandedPhoto' src={singlePhoto.urls.regular} />
                   <p className='userName'>Photo by: {singlePhoto.user.name}</p>
