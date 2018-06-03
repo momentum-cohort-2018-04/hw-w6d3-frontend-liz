@@ -4,14 +4,10 @@ import App from './App'
 
 class Photo extends Component {
 
-// function Photo (props) {
-//   const expandedPhoto = props.expandedPhotos
-//   // }
   render () {
     console.log(this.props.expandedPhotos)
     return (
       <div>
-        {/* {this.props.expandedPhotos !== [] && */}
         <div className='expandedPhotoDiv'>
           <p>Paragraph to make sure this part is still connected.</p>
           <img className='expandedPhoto' src={this.props.expandedPhotos.urls.regular} />

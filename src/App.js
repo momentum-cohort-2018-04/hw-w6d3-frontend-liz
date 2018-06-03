@@ -82,11 +82,11 @@ class App extends Component {
               </div>
             ))
             }
-          </div>
-          <div>
-            {this.props.expandedPhotos !== [] &&
-            <Photo expandedPhotos={this.state.expandedPhotos} />
-            }
+            <div>
+              {this.state.expandedPhotos !== [] &&
+              <Photo expandedPhotos={this.state.expandedPhotos} />
+              }
+            </div>
           </div>
         </main>
       </div>
