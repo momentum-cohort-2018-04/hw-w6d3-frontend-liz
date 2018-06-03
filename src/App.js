@@ -16,7 +16,7 @@ class App extends Component {
     {searchInput: '',
       photoArray: [],
       photosToDisplay: [],
-      expandedPhotos: [],
+      expandedPhoto: null,
       noSearchResults: ''
     }
     this.searchInputToState = this.searchInputToState.bind(this)
@@ -62,8 +62,7 @@ class App extends Component {
 
   expandPhoto (singlePhoto) {
     // console.log('photoClicked')
-    this.setState({expandedPhotos: singlePhoto})
-    console.log(this.expandedPhotos)
+    this.setState({expandedPhoto: singlePhoto})
   }
 
   // componentDidUpdate () {
@@ -95,14 +94,10 @@ class App extends Component {
             {this.state.photoArray.map((singlePhoto, i) => (
               <div key={singlePhoto.id}>
                 <img className='thumbnailDisplay' onClick={(event) => this.expandPhoto(singlePhoto)} src={singlePhoto.urls.thumb} alt='thumbnail' />
+                <Photo expandedPhoto={this.state.expandedPhoto} />
               </div>
             ))
             }
-            {/* <div>
-              {this.state.expandedPhotos !== [] &&
-              <Photo expandedPhotos={this.state.expandedPhotos} />
-              }
-            </div> */}
           </div>
         </main>
       </div>

@@ -4,14 +4,16 @@ import App from './App'
 
 class Photo extends Component {
   render () {
-    console.log(this.props.expandedPhotos)
     return (
       <div>
-        <div className='expandedPhotoDiv'>
-          <p>Paragraph to make sure this part is still connected.</p>
-          <img className='expandedPhoto' src={this.props.expandedPhotos.urls.regular} />
-          <p className='userName'>Photo by: {this.props.expandedPhotos.user.name}</p>
+        {this.props.expandedPhoto !== null &&
+        <div>
+          <div className='expandedPhotoDiv'>
+            <img className='expandedPhoto' src={this.props.expandedPhoto.urls.regular} />
+            <p className='attribution'>Photo by {this.props.expandedPhoto.user.name} on <a href={this.props.expandedPhoto.links.photos}>Unsplash</a> </p>
+          </div>
         </div>
+        }
       </div>
     )
   }
