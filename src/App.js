@@ -16,7 +16,8 @@ class App extends Component {
     {searchInput: '',
       photoArray: [],
       photosToDisplay: [],
-      expandedPhotos: []
+      expandedPhotos: [],
+      noSearchResults: ''
     }
     this.searchInputToState = this.searchInputToState.bind(this)
     this.runSearch = this.runSearch.bind(this)
@@ -44,8 +45,17 @@ class App extends Component {
       .then(response => {
         let searchResults = response.body.results
         // console.log(searchResults)
-        this.setState({
-          photoArray: searchResults})
+        if (searchResults.length === 0) {
+          this.setState({
+            noSearchResults: 'Sorry, no photos were found.'
+          })
+        } else {
+          this.setState({
+            photoArray: searchResults})
+          this.setState({
+            noSearchResults: ''
+          })
+        }
       })
     // this.setState({searchInput: ''})
   }
@@ -71,6 +81,9 @@ class App extends Component {
             <input className='searchInput' type='text' placeholder='Search for images' onChange={this.searchInputToState} />
             <button className='searchButton' type='submit'>Fetch</button>
           </form>
+          <div className='noSearchResultsMessageDiv'>
+            <p>{this.state.noSearchResults}</p>
+          </div>
           <div className='categories'>
             <button className='categorySearch' value='puppy' onClick={this.categorySearch}>Puppies</button>
             <button className='categorySearch' value='otter' onClick={this.categorySearch}>Otters</button>
