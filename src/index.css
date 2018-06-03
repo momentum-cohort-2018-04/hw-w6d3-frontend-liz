@@ -6,7 +6,7 @@ body {
   margin: 0px;
   padding: 0;
   font-family: sans-serif;
-  background: #D3D3D3;
+  background: #F9F9F9;
 }
 
 main {
@@ -22,10 +22,10 @@ main {
 
 .searchButton {
   line-height: 21px;
-  background: #F9F9F9;
+  background: #312D28;
+  color: #F2F2F2;
   font-weight: 700;
   border-radius: 0 3px 3px 0;
-  /* padding: 3px; */
 }
 
 .headerImage {
@@ -51,6 +51,7 @@ main {
   padding: 5px;
   margin: 10px;
   /* border: 0.5px solid #EAEAEA; */
-  background: #F9F9F9F9;
+  background: #312D28;
+  color: #F2F2F2;
   border-radius: 3px;
 }
