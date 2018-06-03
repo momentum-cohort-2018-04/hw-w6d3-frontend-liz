@@ -44,7 +44,6 @@ class App extends Component {
   expandPhoto (singlePhoto) {
     // console.log('photoClicked')
     this.setState({expandedPhotos: singlePhoto})
-    Photo()
   }
   // <Photo bigPhoto={this.state.expandedPhotos} />
   componentDidUpdate () {
@@ -83,7 +82,11 @@ class App extends Component {
               </div>
             ))
             }
+          </div>
+          <div>
+            {this.props.expandedPhotos !== [] &&
             <Photo expandedPhotos={this.state.expandedPhotos} />
+            }
           </div>
         </main>
       </div>
