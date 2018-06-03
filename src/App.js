@@ -6,6 +6,7 @@ import {} from 'dotenv/config'
 // Above is for your env file to work
 import request from 'superagent'
 import { runInThisContext } from 'vm'
+import photoFetch from './photoFetch.png'
 
 const accessKey = process.env.REACT_APP_ACCESS_KEY
 
@@ -73,7 +74,7 @@ class App extends Component {
     return (
       <div className='App'>
         <header>
-          <h1>Photo Fetcher</h1>
+          <img className='headerImage' src={photoFetch} />
         </header>
         <main>
           <form className='searchForm' onSubmit={this.runSearch}>
@@ -84,11 +85,12 @@ class App extends Component {
             <p>{this.state.noSearchResults}</p>
           </div>
           <div className='categories'>
+            <h4>Or search by category:</h4>
             <button className='categorySearch' value='puppy' onClick={this.categorySearch}>Puppies</button>
-            <button className='categorySearch' value='otter' onClick={this.categorySearch}>Otters</button>
-            <button className='categorySearch' value='cow' onClick={this.categorySearch}>Cows</button>
-            <button className='categorySearch' value='bunny' onClick={this.categorySearch}>Bunnies</button>
-            <button className='categorySearch' value='kitten' onClick={this.categorySearch}>Kittens</button>
+            <button className='categorySearch' value='labrador' onClick={this.categorySearch}>Labradors</button>
+            <button className='categorySearch' value='terrier' onClick={this.categorySearch}>Terriers</button>
+            <button className='categorySearch' value='hound' onClick={this.categorySearch}>Hounds</button>
+            <button className='categorySearch' value='mutt' onClick={this.categorySearch}>Mutts</button>
           </div>
           <div className='photoDisplayArea'>
             {this.state.photoArray.map((singlePhoto, i) => (

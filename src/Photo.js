@@ -10,7 +10,7 @@ class Photo extends Component {
         <div>
           <div className='expandedPhotoDiv'>
             <img className='expandedPhoto' src={this.props.expandedPhoto.urls.regular} />
-            <p className='attribution'>Photo by {this.props.expandedPhoto.user.name} on <a href={this.props.expandedPhoto.links.photos}>Unsplash</a> </p>
+            <p className='attribution'>Photo by {this.props.expandedPhoto.user.name} on <a href='{this.props.expandedPhoto.links.self}'>Unsplash</a> </p>
           </div>
         </div>
         }
