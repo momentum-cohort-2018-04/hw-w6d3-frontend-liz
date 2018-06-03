@@ -44,6 +44,7 @@ class App extends Component {
   expandPhoto (singlePhoto) {
     // console.log('photoClicked')
     this.setState({expandedPhotos: singlePhoto})
+    Photo()
   }
   // <Photo bigPhoto={this.state.expandedPhotos} />
   componentDidUpdate () {
@@ -70,11 +71,11 @@ class App extends Component {
             <input className='searchInput' type='text' placeholder='Search for images' onChange={this.searchInputToState} />
             <button className='searchButton' type='submit'>Fetch</button>
           </form>
-          {/* <div> */}
+          <div>
             {/* <button type='submit' className='categorySearch' onSubmit={this.setState({searchInput: 'puppy'})this.runSearch}>Puppies</button> */}
             {/* <button>Otters</button>
             <button>Squirrels</button> */}
-          {/* </div> */}
+          </div>
           <div className='photoDisplayArea'>
             {this.state.photoArray.map((singlePhoto, i) => (
               <div key={singlePhoto.id}>
