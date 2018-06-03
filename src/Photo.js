@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import App from './App'
 
 class Photo extends Component {
-
   render () {
     console.log(this.props.expandedPhotos)
     return (

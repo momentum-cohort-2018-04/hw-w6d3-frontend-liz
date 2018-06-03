@@ -21,20 +21,29 @@ class App extends Component {
     this.searchInputToState = this.searchInputToState.bind(this)
     this.runSearch = this.runSearch.bind(this)
     this.expandPhoto = this.expandPhoto.bind(this)
+    this.categorySearch = this.categorySearch.bind(this)
     // this.expandPhotoHTML = this.expandPhotoHTML.bind(this)
   }
 
   searchInputToState (event) {
     this.setState({searchInput: event.target.value})
+    // console.log(this.state.searchInput)
+  }
+
+  categorySearch (event) {
+    console.log('categorySearch run')
+    this.setState({searchInput: event.target.value})
+    this.runSearch(event)
   }
 
   runSearch (event) {
     event.preventDefault()
+    console.log(this.state.searchInput)
     request
       .get(`https://api.unsplash.com/search/photos?client_id=${accessKey}&query=${this.state.searchInput}`)
       .then(response => {
         let searchResults = response.body.results
-        console.log(searchResults)
+        // console.log(searchResults)
         this.setState({
           photoArray: searchResults})
       })
@@ -44,19 +53,11 @@ class App extends Component {
   expandPhoto (singlePhoto) {
     // console.log('photoClicked')
     this.setState({expandedPhotos: singlePhoto})
-  }
-  // <Photo bigPhoto={this.state.expandedPhotos} />
-  componentDidUpdate () {
-    console.log('expandedPhotosupdate', this.state.expandedPhotos)
+    console.log(this.expandedPhotos)
   }
 
-  // expandPhotoHTML (singlePhoto) {
-  //   return this.state.expandedPhotos.html(
-  //     <div className='expandedPhotoDiv'>
-  //       <img className='expandedPhoto' src={singlePhoto.urls.regular} />
-  //       <p className='userName'>Photo by: {singlePhoto.user.name}</p>
-  //     </div>
-  //   )
+  // componentDidUpdate () {
+  //   console.log('searchInputUpdate', this.state.searchInput)
   // }
 
   render () {
@@ -70,23 +71,25 @@ class App extends Component {
             <input className='searchInput' type='text' placeholder='Search for images' onChange={this.searchInputToState} />
             <button className='searchButton' type='submit'>Fetch</button>
           </form>
-          <div>
-            {/* <button type='submit' className='categorySearch' onSubmit={this.setState({searchInput: 'puppy'})this.runSearch}>Puppies</button> */}
-            {/* <button>Otters</button>
-            <button>Squirrels</button> */}
+          <div className='categories'>
+            <button className='categorySearch' value='puppy' onClick={this.categorySearch}>Puppies</button>
+            <button className='categorySearch' value='otter' onClick={this.categorySearch}>Otters</button>
+            <button className='categorySearch' value='cow' onClick={this.categorySearch}>Cows</button>
+            <button className='categorySearch' value='bunny' onClick={this.categorySearch}>Bunnies</button>
+            <button className='categorySearch' value='kitten' onClick={this.categorySearch}>Kittens</button>
           </div>
           <div className='photoDisplayArea'>
             {this.state.photoArray.map((singlePhoto, i) => (
               <div key={singlePhoto.id}>
-                <img className='thumbnailDisplay' onClick={(event) => this.expandPhoto(singlePhoto)} src={singlePhoto.urls.thumb} />
+                <img className='thumbnailDisplay' onClick={(event) => this.expandPhoto(singlePhoto)} src={singlePhoto.urls.thumb} alt='thumbnail' />
               </div>
             ))
             }
-            <div>
+            {/* <div>
               {this.state.expandedPhotos !== [] &&
               <Photo expandedPhotos={this.state.expandedPhotos} />
               }
-            </div>
+            </div> */}
           </div>
         </main>
       </div>
