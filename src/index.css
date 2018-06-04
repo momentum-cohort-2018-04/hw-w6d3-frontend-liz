@@ -38,6 +38,14 @@ main {
   cursor: pointer;
 }
 
+.thumbnailDisplay {
+margin: 10px;
+}
+
+.noSearchResultsMessageDiv p {
+  font-size: 0.5 rem;
+}
+
 .expandedPhoto {
   max-width: 90%;
 }

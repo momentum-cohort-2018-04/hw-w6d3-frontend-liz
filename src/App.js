@@ -18,6 +18,7 @@ class App extends Component {
       photoArray: [],
       photosToDisplay: [],
       expandedPhoto: null,
+      // expandedPhotoId: null,
       noSearchResults: ''
     }
     this.searchInputToState = this.searchInputToState.bind(this)
@@ -64,6 +65,7 @@ class App extends Component {
   expandPhoto (singlePhoto) {
     // console.log('photoClicked')
     this.setState({expandedPhoto: singlePhoto})
+    // this.setState({expandedPhotoId: singlePhoto.key})
   }
 
   // componentDidUpdate () {
